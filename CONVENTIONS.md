@@ -16,6 +16,15 @@ Sections in this order. Leave out one that does not apply; add none.
 
 Write plain statements of fact. No badges, no paths of one machine, no secrets, and no version numbers that a file in the repository already states.
 
+## Tooling
+
+- **Versions**: the latest stable release of the language, package manager and database image. A Ruby repository states Ruby in `.ruby-version`, the `Gemfile` and the `Dockerfile`; a Node repository states Node and pnpm in `.tool-versions`, `package.json` and both Dockerfiles. The files of one repository agree.
+- **Checks**: one command runs everything CI checks, and CI runs that command: `bin/ci` in a Ruby repository, `pnpm quality:ci` in a Node repository.
+- **Lint and format**: RuboCop with the same `.rubocop.yml` in every Ruby repository; type-checked ESLint and Prettier with the same configuration in every Node repository.
+- **Workflow**: one file, `.github/workflows/publish.yml`. It runs the checks on pull requests and on pushes to `master`, and publishes only on a push to `master`. Actions are pinned by commit, with the version in a comment.
+- **Image tags**: `latest`, and `master-<short sha>` to roll back to.
+- **Updates**: Dependabot opens weekly pull requests for packages and actions. The language version and base images are raised by hand, in every file that states them.
+
 ## Branches and commits
 
 - Work on a branch and merge it to `master`. Delete the branch when it is merged; only `master` stays.
