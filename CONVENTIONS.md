@@ -23,6 +23,7 @@ Write plain statements of fact. No badges, no paths of one machine, no secrets, 
 - **Lint and format**: RuboCop with the same `.rubocop.yml` in every Ruby repository; type-checked ESLint and Prettier with the same configuration in every Node repository.
 - **Workflow**: one file, `.github/workflows/publish.yml`. It runs the checks on pull requests and on pushes to `master`, and publishes only on a push to `master`. Actions are pinned by commit, with the version in a comment.
 - **Image tags**: `latest`, and `master-<short sha>` to roll back to.
+- **Gems**: a gem has no image. Its workflow tags `v<version>` when the version is new, and an application pins that tag.
 - **Updates**: Dependabot opens weekly pull requests for packages and actions. The language version and base images are raised by hand, in every file that states them.
 
 ## Branches and commits
